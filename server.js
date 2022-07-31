@@ -33,7 +33,7 @@ app.get('/',(req,res,next)=>{
 }, (req,res,next)=>{
     // si la iniciamos mostrar bienvenica
 // si no iniciamos redireccionar a login
-    res.send('Bienvenidos')
+    res.render("home")
 })
 
 
@@ -47,6 +47,13 @@ app.post('/login',passport.authenticate('local',{
 })
     
 )
+
+app.post('/logout', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/');
+    });
+  });
 
 app.listen(3000,()=>{
     console.log('servidor iniciado')
